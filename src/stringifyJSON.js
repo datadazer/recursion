@@ -14,10 +14,19 @@ var stringifyJSON = function(obj) {
         result.push(stringifyJSON(o[i]));
       }
     }
-      return "["+ result +"]"
-    }
+    return "["+ result +"]";
+  }
 
-  if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom" && !Array.isArray(obj))
+  var stringObject = function(o){
+    for (key in o){
+      if(key !== undefined){
+        result.push(stringifyJSON(key));
+      }
+    }
+    return "{"+ result +"}";
+  }
+
+  if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom" && !Array.isArray(obj) && typeof obj !== 'object')
   {
     return stringNull(obj);
   }
@@ -32,5 +41,8 @@ var stringifyJSON = function(obj) {
   }
   else if(toString.call(obj) === "[object Array]"){
     return stringArray(obj);
+  }
+  else if(typeof obj === 'object'){
+    return stringObject(obj);
   }
 };
