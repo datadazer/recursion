@@ -8,6 +8,9 @@ var stringifyJSON = function(obj) {
   var stringNull = function(o){return String(o)}
   var stringBool = function(o){return String(o)}
   var stringString = function(o){return "\""+o+"\""}
+  var stringArray = function(o){
+      return "["+ o +"]"
+    }
 
   if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom")
   {
@@ -21,5 +24,8 @@ var stringifyJSON = function(obj) {
   }
   else if(typeof obj === typeof "hi mom"){
     return stringString(obj);
+  }
+  else if(toString.call(obj) === "[object Array]"){
+    return stringArray(obj);
   }
 };
