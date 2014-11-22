@@ -12,7 +12,7 @@ var stringifyJSON = function(obj) {
       return "["+ o +"]"
     }
 
-  if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom")
+  if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom" && !Array.isArray(obj))
   {
     return stringNull(obj);
   }
