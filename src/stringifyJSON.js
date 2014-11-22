@@ -9,7 +9,12 @@ var stringifyJSON = function(obj) {
   var stringBool = function(o){return String(o)}
   var stringString = function(o){return "\""+o+"\""}
   var stringArray = function(o){
-      return "["+ o +"]"
+    for(var i = 0; i < o.length; i++){
+      if(o[i] !== undefined){
+        result.push(stringifyJSON(o[i]));
+      }
+    }
+      return "["+ result +"]"
     }
 
   if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom" && !Array.isArray(obj))
