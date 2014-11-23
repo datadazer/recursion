@@ -19,7 +19,7 @@ var stringifyJSON = function(obj) {
 
   var stringObject = function(o){
     for (key in o){
-      if(key !== undefined){
+      if(o[key] !== undefined && typeof o[key] !== 'function'){
         result.push("\""+key+"\":"+stringifyJSON(o[key]));
       }
     }
