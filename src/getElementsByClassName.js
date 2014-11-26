@@ -10,11 +10,11 @@ var getElementsByClassName = function(className){
 	step(document.body);
 	function step(node){
 		var children = node.childNodes;
-		if(node.classList){
+		if(node.classList.toString() == className){
 			result.push(node);
 		}
 		for(var i=0; i < children.length; i++){
-			if(children[i].className){
+			if(children[i].nodeType === 1){
 				step(children[i]);
 			}
 	    }
