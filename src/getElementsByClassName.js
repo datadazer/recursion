@@ -7,13 +7,17 @@
 var getElementsByClassName = function(className){
 	var result = [];
 	var allNodes = document.body.childNodes;
-		//if(document.body){
-			result.push(document.body);
-		for(var i=0; i < allNodes.length; i++){
-			if(allNodes[i].className){
-				result.push(allNodes[i])
+	step(document.body);
+	function step(node){
+		var children = node.childNodes;
+		if(node.classList){
+			result.push(node);
+		}
+		for(var i=0; i < children.length; i++){
+			if(children[i].className){
+				step(children[i]);
 			}
-		//}
+	    }
 	}
 	return result;
 };
