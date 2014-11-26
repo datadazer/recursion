@@ -6,12 +6,10 @@
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className){
 	var result = [];
-	var $body = $("body");
-	var $p = $("p");
-	var tempResult;
-	tempResult = $body.slice();
-	result.push(tempResult[0]);
-	tempResult = $p.slice();
-	result.push(tempResult[0]);
+	var allNodes = document.body.childNodes;
+	function step(node){
+		
+	}
+
 	return result;
 };
