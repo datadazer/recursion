@@ -10,7 +10,8 @@ var getElementsByClassName = function(className){
 	step(document.body);
 	function step(node){
 		var children = node.childNodes;
-		if(node.classList.toString() == className){
+	    var nodeClasses = Array.prototype.slice.call(node.classList,0);
+		if(nodeClasses.indexOf(className) != -1){
 			result.push(node);
 		}
 		for(var i=0; i < children.length; i++){
