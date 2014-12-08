@@ -4,20 +4,21 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className){
-	var result = [];
-	step(document.body);
-	function step(node){
-		var children = node.childNodes;
-	    var nodeClasses = Array.prototype.slice.call(node.classList,0);
-		if(nodeClasses.indexOf(className) != -1){
-			result.push(node);
-		}
-		for(var i=0; i < children.length; i++){
-			if(children[i].nodeType === 1){
-				step(children[i]);
-			}
-	    }
+var getElementsByClassName = function(className,node){
+
+	//if node is falsy. initialize node to top node (document.body)
+	var nodes = [];
+	node = node || document.body;
+	//Compare node's classname with className
+	  //if matched, save node
+	if(node.className === className){
+		nodes.push(node);
 	}
-	return result;
-};
+	//iterate through each child node
+		//for each child, invoke searchNodes
+	for(var i = 0; i < node.children.length; i++){
+		var childResults = getElementsByClassName(className, node.children[i]);
+		nodes = nodes.concat(childResults);
+	}
+	return nodes;
+}
