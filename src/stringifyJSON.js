@@ -3,46 +3,26 @@
 
 // but you don't so you're going to write it from scratch:
 var stringifyJSON = function(obj) {
-  var result = [];
-  var stringNum = function(o){return String(o)}
-  var stringNull = function(o){return String(o)}
-  var stringBool = function(o){return String(o)}
-  var stringString = function(o){return "\""+o+"\""}
-  var stringArray = function(o){
-    for(var i = 0; i < o.length; i++){
-      if(o[i] !== undefined){
-        result.push(stringifyJSON(o[i]));
-      }
-    }
-    return "["+ result +"]";
-  }
 
-  var stringObject = function(o){
-    for (key in o){
-      if(o[key] !== undefined && typeof o[key] !== 'function'){
-        result.push("\""+key+"\":"+stringifyJSON(o[key]));
-      }
+  if(Array.isArray(obj)){
+    var results = [];
+    for(var i = 0; i < obj.length; i++){
+      results.push(stringifyJSON(obj[i]));
     }
-    return "{"+ result +"}";
+    return '['+results.join(',')+']';
   }
-
-  if(obj === null || isNaN(obj) && typeof obj !== typeof "hi mom" && !Array.isArray(obj) && typeof obj !== 'object')
-  {
-    return stringNull(obj);
+  if(obj && typeof obj === 'object'){
+    var results = [];
+    for(var key in obj){
+      if(obj[key] === undefined || typeof obj[key] === 'function'){
+        continue;
+      }
+      results.push(stringifyJSON(key)+':'+stringifyJSON(obj[key]));
+    }
+    return '{'+results.join(',')+'}';
   }
-  else if(typeof obj === typeof 123){
-  return stringNum(obj);
+  if(typeof obj === 'string'){
+    return '"'+obj+'"';
   }
-  else if(typeof obj === typeof true){
-    return stringBool(obj);
-  }
-  else if(typeof obj === typeof "hi mom"){
-    return stringString(obj);
-  }
-  else if(toString.call(obj) === "[object Array]"){
-    return stringArray(obj);
-  }
-  else if(typeof obj === 'object'){
-    return stringObject(obj);
-  }
+  return''+obj;
 };
