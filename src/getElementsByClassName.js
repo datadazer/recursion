@@ -11,7 +11,8 @@ var getElementsByClassName = function(className,node){
 	node = node || document.body;
 	//Compare node's classname with className
 	  //if matched, save node
-	if(node.className === className){
+	var parts = node.className.split(' ');
+	if(parts.indexOf(className) >= 0){
 		nodes.push(node);
 	}
 	//iterate through each child node
